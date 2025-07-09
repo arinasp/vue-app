@@ -7,14 +7,14 @@
 </head>
 <body>
     <div>
-        <form>
+        <form onsubmit="SubmitHandler">
             <h1>Трекер привычек</h1>
             <div>
-                <input><label for="habit-name">Название привычек</label>
+                <label for="habit-name">Название привычек</label>
                 <input id="habit-name"></input></div>
             <div>
                 <label for="discrition">Описание привычек</label>
-                <input id="discrition"></input></div>
+                <textarea id="discrition" required></textarea></div>
             <div>
                 <label for="frequency">Частота выполнения</label>
                 <select id="frequency">
@@ -34,7 +34,6 @@
         </form>
     </div>
     <script>
-
     </script>
 </body>
 </html>
