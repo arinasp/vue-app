@@ -8,11 +8,30 @@
 <body>
     <div>
         <form>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <h1>Трекер привычек</h1>
+            <div>
+                <input><label for="habit-name">Название привычек</label>
+                <input id="habit-name"></input>
+            </div>
+            <div>
+                <label for="discrition">Описание привычек</label>
+                <input id="discrition"></input>
+            </div>
+            <div>
+                <label for="frequency">Частота выполнения</label>
+                <select id="frequency"></select>
+                    <option value="1">Каждый день</option>
+                    <option value="7">Раз в неделю</option>
+                    <option value="30">раз в месяц</option>
+                </select>
+            </div>
+            <div>
+                <label for="count">Количество повторений</label>
+                <input id="count" type="number"></input>
+            </div>
+            <div>Общее количестыо выполнений <span id="sum"></span>
+            </div>
+            <button type="submit">Созранить</button>
         </form>
     </div>
 </body>
