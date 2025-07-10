@@ -40,9 +40,11 @@ button{
     margin-top: 20px;
     padding: 10px;
     background-color: var(--button__bg);  
-    color: rgb(37, 199, 5);
+    color: rgb(0, 0, 0);
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer; 
 }
-
+button[type=submit]:hover {
+  background-color: rgb(25, 108, 163); 
+}
