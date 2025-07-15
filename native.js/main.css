@@ -1,5 +1,6 @@
+@import"../native_js/main.css";
 :root {
-
+  
   --bg-color: gray;     
   --card__bg: #fff;    
 }        

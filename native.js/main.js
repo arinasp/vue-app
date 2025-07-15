@@ -1,100 +1,61 @@
-const { handleError } = require("vue");
-
 console.log("Скрипт запущен");
 alert("Скрипт запущен");
-const habit={
-    name:'',
-    description:'',
-    frequency:0,
-    count:0,
-    sum:0,
-
+const habit = {
+  name: "",
+  description: "",
+  frequency: 0,
+  count: 0,
+  sum: 0,
 };
 
-const nameMeta={
-    selector:document.querySelector('#habit-name'),
-    handler:(ev)=>{
-        habit.name=ev.target.value;
-        console.log(name);
-    }
-}
+const nameMeta = {
+  selector: document.querySelector("#habit-name"),
+  handler: (ev) => {
+    habit.name = ev.target.value;
+    console.log("Имя привычки:", habit.name);
+  },
+};
 
 const descriptionMeta = {
-    selector: document.querySelector('#description'),
-    handler: (ev) => {
-        habit.description = ev.target.value;
-        console.log('habit.description:', habit.description);
-    }
+  selector: document.querySelector("#description"),
+  handler: (ev) => {
+    habit.description = ev.target.value;
+    console.log("Описание привычки:", habit.description);
+  },
 };
 
 const frequencyMeta = {
-    selector: document.querySelector('#frequency'),
-    handler: (ev) => {
-        const value = ev.target.value;
-        habit.frequency = value ? parseInt(value) : 0;
-        console.log('habit.frequency:', habit.frequency);
-        setSum();
-    }
+  selector: document.querySelector("#frequency"),
+  handler: (ev) => {
+    habit.frequency = parseInt(ev.target.value) || 0;
+    setSum();
+    console.log("Частота:", habit.frequency);
+  },
 };
 
 const countMeta = {
-    selector: document.querySelector('#count'),
-    handler: (ev) => {
-        const value = ev.target.value;
-        habit.count = value ? parseInt(value) : 0;
-        console.log('habit.count:', habit.count);
-        setSum();
-    }
-}
-const metaData=[nameMeta];
-for (const {selector, handler} of metaData){
-    if(selector.tagName.toLowerCase()== 'select'){
-        selector.addEventListener('change', handler)
-    }
-    else
-        selector.addEventListener('input', handler)
-}
-let name = '';
-let description = '';
-let frequency = 0;
-let count = 0;
-let sum = 0;
-
-const nameInput = document.querySelector('#habit-name');
-const descriptionInput = document.querySelector('#description');
-const frequencySelect = document.querySelector('#frequency');
-const countInput = document.querySelector('#count');
-const sumElement = document.querySelector('#sum');
-
-console.log(nameInput, descriptionInput, frequencySelect, countInput, sumElement);
-
-function nameInputHandler(ev) {
-    name = ev.target.value;
-    console.log(name);
-}
-nameInput.addEventListener('input', nameInputHandler);
-
-function frequencyChange(ev) {
-    const value = ev.target.value;
-    frequency = value ? parseInt(value) : 0;
+  selector: document.querySelector("#count"),
+  handler: (ev) => {
+    habit.count = parseInt(ev.target.value) || 0;
     setSum();
-    console.log(frequency);
-}
-frequencySelect.addEventListener('change', frequencyChange);
-
-function countInputHandler(ev) {
-    const value = ev.target.value;
-    count = value ? parseInt(value) : 0;
-    setSum();
-    console.log(count);
-}
-countInput.addEventListener('input', countInputHandler);
+    console.log("Повторений:", habit.count);
+  },
+};
 
 function setSum() {
-    sum = frequency * count;
-    sumElement.textContent = sum;
-    console.log("Сумма обновлена:", sum);
-
+  habit.sum = habit.frequency * habit.count;
+  document.querySelector("#sum").textContent = habit.sum;
+  console.log("Обновлена сумма:", habit.sum);
 }
 
-const formElement=
+const metaData = [nameMeta, descriptionMeta, frequencyMeta, countMeta];
+
+for (const { selector, handler } of metaData) {
+  if (!selector) continue; 
+  const tag = selector.tagName.toLowerCase();
+  if (tag === "select") {
+    selector.addEventListener("change", handler);
+  } else {
+    selector.addEventListener("input", handler);
+  }
+}
