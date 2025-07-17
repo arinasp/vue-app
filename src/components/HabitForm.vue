@@ -1,6 +1,7 @@
 
 <script setup>
 import { reactive, computed, ref, watch } from 'vue';
+const habit = defineModel({default:{name:'foo'}});
 
 const habit = reactive({
   name: '',
