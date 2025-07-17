@@ -9,12 +9,12 @@ const habit = reactive({
   count: 0
 });
 
-const sum = computed(() => habit.count * habit.frequency);
+const sum = computed(() => habit.value.count * habit.value.frequency);
 
-const label = ref('');
+const label = ref();
 
 watch(
-  () => ({ name: habit.name, description: habit.description }),
+  () => ({ name: habit.value.name, description: habit.value.description }),
   (newVal) => {
     label.value = `${newVal.name} — ${newVal.description}`;
   },
@@ -27,8 +27,7 @@ watch(
 
     <form @submit.prevent>
       <h1>Трекер привычек</h1>
-      <p>Метка: 
-        {{ label }}</p>
+      
 
       <div>
         <label for="habit-name">Название привычки</label>
@@ -59,7 +58,7 @@ watch(
       </div>
 
       <button type="submit">Сохранить</button>
-      <button type="button">Простое нажатие</button>
+      <button type="submit">Простое нажатие</button>
     </form>
   </div>
 </template>
