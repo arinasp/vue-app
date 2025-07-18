@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import HabitListItem from './HabitListItem.vue';
 
 const habitList = reactive([
@@ -7,7 +7,7 @@ const habitList = reactive([
     name: 'Бег',
     description: 'Бег в 7:00',
     frequency: 1,
-    count: 365
+    count: 365,
   }
 ]);
 
@@ -20,20 +20,38 @@ const newhabitList = reactive([
   }
 ]);
 
-const allHabits = reactive([...habitList, ...newhabitList]); 
+// const fetchHabits=asyns()=>{
+//   try{
+//     const response=await fetch ('/habit');
+//     const json =await response.json();
+//     habitList.length=0;
+//     if(
+//       (Array.isArray(json)){
+//         habitList.push(...json)
+//       }
+//     )
+//   }
+// }
+
+const allHabits = reactive([...habitList, ...newhabitList]);
 
 const deleteHandler = (idx) => {
-  habitList.splice(idx, 1);
+  allHabits.splice(idx, 1);
 };
+
+
 </script>
+
+
+
 
 <template>
   <div class="habit-wrapper">
     <ul class="habit-list">
-      <HabitListItem v-for="(item, idx) in habitList" 
+      <HabitListItem v-for="(item, idx) in allHabits" 
       :item="item"
       :key="idx"
-      @click="$emit('select:habit', habit)"
+      @click="$emit('select:habit', item)"
       class="list-item">
         <template #action>
           <button @click.stop="deleteHandler(idx)">Удалить</button>
@@ -93,7 +111,7 @@ const deleteHandler = (idx) => {
 
 .habit-list button {
   margin-top: 0.75rem;
-  align-self: center; /* Центрирует кнопку по горизонтали */
+  align-self: center; 
   background-color: var(--button-bg, #0d60ad);
   color: #fff;
   padding: 0.5em 1.2em;

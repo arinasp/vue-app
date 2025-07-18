@@ -3,14 +3,19 @@
 import { reactive, computed, ref, watch } from 'vue';
 const habit = defineModel({default:{name:'foo'}});
 
-const habit = reactive({
+const habitList = reactive({
   name: '',
   description: '',
   frequency: 1,
   count: 0
 });
 
-const sum = computed(() => habit.value.count * habit.value.frequency);
+
+const sum = computed(() => {
+  const count = habit.value?.count ?? 0;
+  const frequency = habit.value?.frequency ?? 0;
+  return count * frequency;
+});
 
 const label = ref();
 
@@ -21,6 +26,8 @@ watch(
   },
   { deep: true, immediate: true }
 );
+
+
 </script>
 
 <template>
